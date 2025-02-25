@@ -1,0 +1,25 @@
+# Ignore .env files
+.env
+
+# Ignore build output directories
+/bin/
+/obj/
+
+# Ignore user-specific files and folders
+*.user
+.vs/
+.vscode/
+
+# Ignore log files
+Logs/
+
+# Ignore development configuration files
+appsettings.Development.json
+
+# Ignore backup files and OS-specific files
+*.bak
+*.swp
+Thumbs.db
+
+# Ignore temporary files
+*.log

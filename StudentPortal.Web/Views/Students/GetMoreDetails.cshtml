@@ -1,0 +1,58 @@
+﻿@model StudentPortal.Web.Models.Entities.Student
+
+<h1 class="text-primary m-11">More Info</h1>
+
+<table class="table">
+    <tr>
+        <td>Id :</td>
+        <td>@Model.Id</td>
+    </tr>
+    <tr>
+        <td>Name :</td>
+        <td>@Model.Name</td>
+    </tr>
+    <tr>
+        <td>Email :</td>
+        <td>@Model.Email</td>
+    </tr>
+    <tr>
+        <td>Phone :</td>
+        <td>@Model.Phone</td>
+    </tr>
+    <tr>
+        <td>Subscribed :</td>
+        <td>@Model.Subscribed</td>
+    </tr>
+</table>
+
+@* 
+public IActionResult MoreInfo(int id)
+{
+    var student = _context.Students.FirstOrDefault(s => s.Id == id);
+    if (student == null)
+    {
+        return NotFound();
+    }
+
+    // Using ViewBag
+    ViewBag.StudentId = student.Id;
+    ViewBag.StudentName = student.Name;
+    ViewBag.StudentEmail = student.Email;
+    ViewBag.StudentPhone = student.Phone;
+    ViewBag.StudentSubscribed = student.Subscribed;
+
+TempData["StudentId"] = student.Id;
+TempData["StudentName"] = student.Name;
+TempData["StudentEmail"] = student.Email;
+TempData["StudentPhone"] = student.Phone;
+TempData["StudentSubscribed"] = student.Subscribed;
+
+    ViewData["StudentId"] = student.Id;
+ViewData["StudentName"] = student.Name;
+ViewData["StudentEmail"] = student.Email;
+ViewData["StudentPhone"] = student.Phone;
+ViewData["StudentSubscribed"] = student.Subscribed;
+
+    return View();
+}
+ *@

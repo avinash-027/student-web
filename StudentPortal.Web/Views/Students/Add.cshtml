@@ -1,0 +1,107 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model StudentPortal.Web.Models.AddStudentViewModel
+
+<form method="post">	
+<div class="border p-3 mt-4">
+	<h1 class="p-1 text-primary">Create Student</h1>
+	<div asp-validation-summary="All" class="text-danger"></div>
+	<hr/>
+
+	<div class="mt-3 mb-3">
+		<label class="form-label">Name</label>
+		<input type="text" class="form-control" asp-for="Name" />
+		<span asp-validation-for="Name" class="text-danger"></span>
+	</div>
+
+	<div class="mt-3">
+		<label asp-for="Email" class="form-label" ></label>
+		<input type="email" class="form-control" asp-for="Email" />
+		<span asp-validation-for="Email" class="text-danger"></span>
+	</div>
+
+	<div class="mt-3 mb-3">
+		<label class="form-label" >Phone</label>
+		<input type="text" class="form-control" asp-for="Phone" />
+		<span asp-validation-for="Phone" class="text-danger"></span>
+
+	</div>
+
+	<div class="mt-3 mb-3">
+		<input type="checkbox" class="form-check-input" id="Subscribed" asp-for="Subscribed"/>
+		<label class="form-check-label" for="Subscribed">Subscribed</label>        
+
+	</div>
+	<div class="mt-3">
+		<button class="btn btn-primary" type="submit">Save</button>
+		<!-- Change the button to type="submit" -->
+	</div>
+</div>
+</form>
+
+<p>@Html.ValidationSummary(true) </p>
+
+	
+@* When you call ModelState.AddModelError, if you pass string.Empty as the key, it indicates a general model-level error that is not associated with any particular field. These errors are typically shown in the validation summary when using @Html.ValidationSummary(true). *@
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+@* 
+A list of model-level errors (from @Html.ValidationSummary(true))
+Specific field errors (from @Html.ValidationMessageFor()) next to the form fields *@
+
+@* JavaScript Validation:
+-- you are hitting server every time, as all the validations are done in server side.. so we make all the validations on the client side
+-- Don't forget that for client-side validation to work, you should have the necessary validation scripts included in your layout (usually _ValidationScriptsPartial in ASP.NET Core).
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+-OR-
+@section Scripts{
+	@{
+	<partial name="_ValidationScriptsPartial"/>
+	}
+}
+- Inline Validations
+*@
+
+@* 
+Mixing @Html.ValidationSummary with asp-validation-summary:
+
+- You are using both @Html.ValidationSummary(true) and <div asp-validation-summary="All"></div>. You typically only need one of them, not both.
+@Html.ValidationSummary(true) works for showing model-level validation messages, but the <div asp-validation-summary="All"></div> tag is the correct way to display the validation summary in ASP.NET Core.
+Model Binding and Validation Attributes:
+- Ensure that your AddStudentViewModel model has appropriate validation annotations, such as [Required] or [EmailAddress], to trigger validation errors. 
+*@
+
+@* <script>
+	function DoSomething(){
+		var paras = document.getElementsByClassName("appear");
+		for(i=0; i<= paras.length; i++){
+			paras[i].style.display="block";
+		}
+	}
+	setTimeout(function() {
+		var buttonnn = document.getElementsByClassName("buttonn")[0];
+		buttonnn.style.display="block";
+	},2000);
+</script> *@
+
+@* 
+<button class="btn btn-primary buttonn" style="display: none;" onclick="DoSomething()">click</button>
+
+<p class="appear" style="display: none;"> </p>
+<p class="appear" style="display: none;"> </p>
+<p class="appear" style="display: none;"> </p>
+<p class="appear" style="display: none;"> </p>
+<p class="appear" style="display: none;"> </p>
+<p class="appear" style="display: none;"> </p>
+<p class="appear" style="display: none;"> </p>
+<p class="appear" style="display: none;"> </p> *@

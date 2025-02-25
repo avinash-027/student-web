@@ -1,0 +1,83 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@* .btn:hover {
+    background-color: #6c757d !important; /* Grey color for hover */
+    color: white !important; /* Text color set to white */
+}
+
+/* Optional: Add different grey shades for specific buttons if needed */
+.btn-danger:hover {
+    background-color: #6c757d !important; /* Same grey color or you can change it */
+    color: white !important;
+} *@
+@model IEnumerable<StudentPortal.Web.Models.Entities.Student>
+
+<div class="container p-3">
+	<div class="row pt-4">
+		<div class="col-6">
+			<h1 class="text-primary">Students List</h1>
+		</div>
+		<div class="col-6 text-end">
+			<a class="btn btn-primary" asp-controller="Students" asp-action="Add">
+				<i class="bi bi-snow2"></i>&nbsp;
+				Create New Student
+			</a>
+		</div>
+	</div>
+	<br />
+
+	@{
+		if (TempData["insert_message"] != null)
+		{
+			<div class="alert alert-success alert-dismissible fade show fade-in-2s" role="alert">
+				<strong>Success:</strong> @TempData["insert_message"]
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		}
+	}
+
+	<table class="table table-bordered table-striped" style=" width:100% ">
+		<thead>
+			<tr>
+				<td>Id</td>
+				<td>@Html.DisplayNameFor(model => model.Name)</td>
+				<td>Email</td>
+				<td>Phone</td>
+				<td> </td>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var student in Model)
+			{
+				<tr>
+					<td>@student.Id</td>
+					<td>@student.Name</td>
+					<td>@student.Email</td>
+					<td>@student.Phone</td>
+					<td >
+						<div>
+							<a class="btn btn-primary hover-white ms-3" asp-controller="Students" asp-action="Edit" asp-route-id="@student.Id">Edit &nbsp; <i class="bi bi-pencil-square"></i></a>
+
+							<a class="btn btn-info ms-3" asp-controller="Students" asp-action="GetMoreDetails" asp-route-id="@student.Id">More Info</a>
+
+							@* <a class="btn btn-danger ms-3" asp-controller="Students" asp-action="DeleteId" asp-route-id="@student.Id" onclick="return confirm('Deletions should not be triggered via GET requests (which is what your link generates). The correct approach is to use a POST request.');">Delete &nbsp;<i class="bi bi-x-square"></i></a> *@
+
+							<form method="post" style="display:inline">
+								<button onclick="return confirm('are U sure To delete...?');" class="btn btn-danger ms-3" asp-controller="Students" asp-action="DeleteId" asp-route-id="@student.Id">
+									Delete
+								</button>
+							</form>
+						</div>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>
+
+
+@* In the <td class="text-center">, I used the d-flex justify-content-between Bootstrap *@
+@* <p><a asp-controller="Students" asp-action="Add" class="col-6 text-end">Add More Students</a></p> *@
